@@ -1,29 +1,16 @@
 pipeline {
-    agent any
-    stages{
-        stage("Build"){
-            steps{
-                echo "Build stage"
-            }
-        }
-        stage("Scan"){
-            steps{
-                echo "scan the code"
-            }
-        }
-        stage("Dockerbuild"){
-            steps{
-                echo "build docker image"
-            }
-        }
-        stage("deploy"){
-            steps{
-                echo "deploying "
-            }
-        }
-        stage("prod"){
-            steps{
-                echo "prod"
+    agent {
+        label "jenkins-slave1"
+    }
+    environment {
+        name = "REO"
+        course = "Jenkins"
+    }
+    stages {
+        stage ("First Stage"){
+            steps {
+                echo "Welcome ${name}"
+                echo " Thanks for choosing ${course} course"
             }
         }
     }
