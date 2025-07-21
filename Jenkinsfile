@@ -8,7 +8,7 @@ pipeline {
     stages{
         stage("Build Stage"){
             when {
-                environment name : 'TODAYS_DAY', value : 'Monday'
+                environment name : 'TODAYS_DAY', value : ' Monday '
             }
             steps {
                 echo "executing pipeline for when example"
