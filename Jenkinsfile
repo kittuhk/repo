@@ -1,30 +1,19 @@
-// Here i am declaring environment block under the stage level
-//i will change the name in the stage block it wil consider stage block for high preference 
 pipeline {
-    agent {
+    agent{
         label "jenkins-slave1"
     }
     environment {
-        name = "REO"
-        course = "Jenkins"
-        company = "sfty"
+        TODAYS_DAY = " Monday "
     }
-    stages {
-        stage ("First Stage"){
-            environment {
-                name = " Kittu "
-                course = " Maven "
-            }   
-            steps {
-                echo "Welcome ${name}"
-                echo " Thanks for choosing ${course} course"
-                echo " Welcome to ${company}"
+    stages{
+        stage("Build Stage"){
+            when {
+                environment name : 'TODAYS_DAY', value : 'Monday'
             }
-        }
-        stage (" Second Stage"){
             steps {
-                echo " Welcome to ${company} world"
+                echo "executing pipeline for when example"
             }
         }
     }
 }
+
