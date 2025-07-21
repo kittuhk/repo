@@ -1,16 +1,25 @@
 pipeline {
-    agent{
+    agent {
         label "jenkins-slave1"
     }
     environment {
-        TODAYS_DAY = " Monday "
+        DEPLOY_TO = 'production'
     }
     stages{
-        stage("Build Stage"){
-            when {
-                expression {BRANCH_NAME ==~ /(main|deploy)/ }
-            }
+        stage ("Build"){
             steps {
-                echo "executing pipeline for when example"
+                echo "printing build stage"
+                sh "hostname -i"
             }
         }
+        stage ("prod"){
+            when {
+                branch : 'main'
+                environment name : 'DEPLOY_TO', value : 'production'
+            }
+            steps{
+                echo "Deploy to production"
+            }
+        }
+    }
+}
