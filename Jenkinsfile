@@ -8,12 +8,9 @@ pipeline {
     stages{
         stage("Build Stage"){
             when {
-                environment name : 'TODAYS_DAY', value : ' Monday '
+                expression {BRANCH_NAME ==~ /(main|deploy)/ }
             }
             steps {
                 echo "executing pipeline for when example"
             }
         }
-    }
-}
-
