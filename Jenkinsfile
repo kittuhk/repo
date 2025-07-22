@@ -45,7 +45,7 @@ pipeline {
         }
         stage("DeployToProd"){
             options{
-                timeout(time:300, units:'SECONDS')
+                timeout(time:300,unit:'SECONDS')
             }
             input{
                 message "Doing Prod Deployments ?"
