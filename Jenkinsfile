@@ -1,4 +1,3 @@
-//here is the parallel block code
 pipeline {
     agent any
     stages {
@@ -8,7 +7,7 @@ pipeline {
             }
         }
         stage ("scans"){
-            parallel{
+            parallel{ //here below the stage we can add parallel block 
                 stage("Sonarscans"){
                     steps{
                         echo "Sonarscan is executing"
@@ -29,5 +28,36 @@ pipeline {
                 }
             }
         }
+        stage("DeployToDev"){
+            steps{
+                echo "Deploying to dev environment"
+            }
+        }
+        stage("DeployToTest"){
+            steps{
+                echo "Deploying to test environment"
+            }
+        }
+        stage("DeployToStage"){
+            steps{
+                echo "Deploying to stage environment"
+            }
+        }
+        stage("DeployToProd"){
+            options{
+                timeout(time:300, units:'SECONDS')
+            }
+            input{
+                message "Doing Prod Deployments ?"
+                ok "yes"
+                submitter "hari,mani" //who would be having access to approve
+            }
+            steps{
+                echo "Deploying to prod enviroment"
+                //timeout(time:300 ,units:'SECONDS')
+                      //input message: "Doing Prod Deployments ?",ok:"yes",submitter: "hari,mani"
+            }
+        }
+        
     }
 }
