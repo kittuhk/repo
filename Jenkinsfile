@@ -1,12 +1,15 @@
+/Here is the parallel pipeline
 pipeline {
     agent any
-    stages{
+    stages {
         stage ("Build"){
             steps {
                 echo "Building the application"
             }
         }
-        stage ("sonar scan"){
+        stage ("scans"){
+            parallel{
+                stage ("sonar scan"){
             steps{
                 echo "sonar scan is executing"
                 sleep 15
@@ -24,5 +27,7 @@ pipeline {
                 sleep 15
             }
         }
+        
+        }
     }
-}
+}}
