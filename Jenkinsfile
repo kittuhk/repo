@@ -14,9 +14,9 @@ pipeline {
         failure {        //code will trigger only the pipeline is failure
             echo "print pipeline is failure"
         }
-        always[           //will trigger this block, irrespective of succuss or failure 
+        always{           //will trigger this block, irrespective of succuss or failure 
                         // mail wil also trigger here
             echo "always block is triggered"
-        ]
+        }
     }
 }
