@@ -1,26 +1,27 @@
 pipeline {
-    agent {
-        label "jenkins-slave1"
-    }
-    environment {
-        DEPLOY_TO = 'production'
-    }
+    agent any
     stages{
         stage ("Build"){
             steps {
-                echo "printing build stage"
-                sh "hostname -i"
+                echo "Building the application"
             }
         }
-        stage ("prod"){
-            when {
-                allOf{
-                    branch 'main'
-                environment name : 'DEPLOY_TO', value : 'production'
-                }
-            }
+        stage ("sonar scan"){
             steps{
-                echo "Deploy to production"
+                echo "sonar scan is executing"
+                sleep 15
+            }
+        }
+        stage ("Fortifyscan"){
+            steps{
+                echo "fortifyscan is executing"
+                sleep 15
+            }
+        }
+        stage ("Prismascan"){
+            steps{
+                echo "prismascan is executing"
+                sleep 15
             }
         }
     }
